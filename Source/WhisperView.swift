@@ -7,10 +7,10 @@ public protocol NotificationControllerDelegate: class {
 public class WhisperView: UIView {
 
   struct Dimensions {
-    static let height: CGFloat = 24
+    static let height: CGFloat = 35
     static let offsetHeight: CGFloat = height * 2
     static let imageSize: CGFloat = 14
-    static let loaderTitleOffset: CGFloat = 5
+    static let loaderTitleOffset: CGFloat = 10
   }
 
   lazy private(set) var transformViews: [UIView] = [self.titleLabel, self.complementImageView]
@@ -18,7 +18,7 @@ public class WhisperView: UIView {
   public lazy var titleLabel: UILabel = {
     let label = UILabel()
     label.textAlignment = .Center
-    label.font = UIFont(name: "HelveticaNeue", size: 13)
+    label.font = UIFont(name: "ProximaNova-Regular", size: 14)
     label.frame.size.width = UIScreen.mainScreen().bounds.width - 60
 
     return label
@@ -34,6 +34,7 @@ public class WhisperView: UIView {
   public weak var delegate: NotificationControllerDelegate?
   public var height: CGFloat
   var whisperImages: [UIImage]?
+  var message:Message?
 
   // MARK: - Initializers
 
@@ -45,7 +46,12 @@ public class WhisperView: UIView {
     titleLabel.text = message.title
     titleLabel.textColor = message.textColor
     backgroundColor = message.backgroundColor
-
+    
+    self.userInteractionEnabled = true
+    
+    self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(WhisperView.handleTapGestureRecognizer )  )  )
+    self.message = message
+    
     if let images = whisperImages where images.count > 1 {
       complementImageView.animationImages = images
       complementImageView.animationDuration = 0.7
@@ -60,7 +66,13 @@ public class WhisperView: UIView {
     titleLabel.sizeToFit()
     setupFrames()
     clipsToBounds = true
+    
   }
+    
+   func handleTapGestureRecognizer(){
+        print("tapped wihotut action")
+        self.message?.tapAction?()
+   }
 
   public required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
