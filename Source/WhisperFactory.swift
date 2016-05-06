@@ -142,7 +142,7 @@ class WhisperFactory: NSObject {
         subview.alpha = 1
       }
       }, completion: { _ in
-        self.delayTimer = NSTimer.scheduledTimerWithTimeInterval(1.5, target: self,
+        self.delayTimer = NSTimer.scheduledTimerWithTimeInterval(7, target: self,
           selector: #selector(WhisperFactory.delayFired(_:)), userInfo: nil, repeats: false)
     })
   }
