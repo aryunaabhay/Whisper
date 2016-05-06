@@ -6,12 +6,15 @@ public struct Message {
   public var textColor: UIColor
   public var backgroundColor: UIColor
   public var images: [UIImage]?
-
-  public init(title: String, textColor: UIColor = UIColor.whiteColor(), backgroundColor: UIColor = UIColor.lightGrayColor(), images: [UIImage]? = nil) {
+  public var tapAction: (() -> Void)?
+    
+    
+    public init(title: String, textColor: UIColor = UIColor.whiteColor(), backgroundColor: UIColor = UIColor.lightGrayColor(), images: [UIImage]? = nil, tapAction:(() -> Void)? = nil) {
     self.title = title
     self.textColor = textColor
     self.backgroundColor = backgroundColor
     self.images = images
+    self.tapAction = tapAction
   }
 }
 
