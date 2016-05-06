@@ -13,7 +13,7 @@ public class ShoutView: UIView {
     public static let indicatorWidth: CGFloat = 50
     public static let imageSize: CGFloat = 40
     public static let imageOffset: CGFloat = 12
-    public static var height: CGFloat = UIApplication.sharedApplication().statusBarHidden ? 80 : 90
+    public static var height: CGFloat = UIApplication.sharedApplication().statusBarHidden ? 75 : 85
     public static var textOffset: CGFloat = 67
   }
 
@@ -122,7 +122,7 @@ public class ShoutView: UIView {
   // MARK: - Configuration
 
   public func craft(announcement: Announcement, to: UIViewController, completion: (() -> ())?) {
-    Dimensions.height = UIApplication.sharedApplication().statusBarHidden ? 80 : 90
+    Dimensions.height = UIApplication.sharedApplication().statusBarHidden ? 75 : 85
 
     panGestureActive = false
     shouldSilent = false
@@ -180,8 +180,8 @@ public class ShoutView: UIView {
       y: Dimensions.height - Dimensions.indicatorHeight - 5, width: Dimensions.indicatorWidth, height: Dimensions.indicatorHeight)
     imageView.frame = CGRect(x: Dimensions.imageOffset, y: (Dimensions.height - Dimensions.imageSize) / 2 + offset,
       width: Dimensions.imageSize, height: Dimensions.imageSize)
-    titleLabel.frame.origin = CGPoint(x: Dimensions.textOffset, y: imageView.frame.origin.y + 3)
-    subtitleLabel.frame.origin = CGPoint(x: Dimensions.textOffset, y: CGRectGetMaxY(titleLabel.frame) + 2.5)
+    titleLabel.frame.origin = CGPoint(x: Dimensions.textOffset, y: imageView.frame.origin.y + 4.5)
+    subtitleLabel.frame.origin = CGPoint(x: Dimensions.textOffset, y: CGRectGetMaxY(titleLabel.frame) + 1)
 
     if let text = subtitleLabel.text where text.isEmpty {
       titleLabel.center.y = imageView.center.y - 2.5
