@@ -11,10 +11,10 @@ public class ShoutView: UIView {
   public struct Dimensions {
     public static let indicatorHeight: CGFloat = 6
     public static let indicatorWidth: CGFloat = 50
-    public static let imageSize: CGFloat = 48
-    public static let imageOffset: CGFloat = 18
-    public static var height: CGFloat = UIApplication.sharedApplication().statusBarHidden ? 70 : 80
-    public static var textOffset: CGFloat = 75
+    public static let imageSize: CGFloat = 40
+    public static let imageOffset: CGFloat = 12
+    public static var height: CGFloat = UIApplication.sharedApplication().statusBarHidden ? 80 : 90
+    public static var textOffset: CGFloat = 67
   }
 
   public private(set) lazy var backgroundView: UIView = {
@@ -122,7 +122,7 @@ public class ShoutView: UIView {
   // MARK: - Configuration
 
   public func craft(announcement: Announcement, to: UIViewController, completion: (() -> ())?) {
-    Dimensions.height = UIApplication.sharedApplication().statusBarHidden ? 70 : 80
+    Dimensions.height = UIApplication.sharedApplication().statusBarHidden ? 80 : 90
 
     panGestureActive = false
     shouldSilent = false
@@ -172,7 +172,7 @@ public class ShoutView: UIView {
 
   public func setupFrames() {
     let totalWidth = UIScreen.mainScreen().bounds.width
-    let offset: CGFloat = UIApplication.sharedApplication().statusBarHidden ? 2.5 : 5
+    let offset: CGFloat = UIApplication.sharedApplication().statusBarHidden ? 4.5 : 7
 
     backgroundView.frame.size = CGSize(width: totalWidth, height: Dimensions.height)
     gestureContainer.frame = CGRect(x: 0, y: Dimensions.height - 20, width: totalWidth, height: 20)
