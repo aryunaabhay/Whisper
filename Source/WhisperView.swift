@@ -7,7 +7,7 @@ public protocol NotificationControllerDelegate: class {
 public class WhisperView: UIView {
 
   struct Dimensions {
-    static let height: CGFloat = 35
+    static let height: CGFloat = 30
     static let offsetHeight: CGFloat = height * 2
     static let imageSize: CGFloat = 14
     static let loaderTitleOffset: CGFloat = 10
