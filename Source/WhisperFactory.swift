@@ -115,13 +115,12 @@ class WhisperFactory: NSObject {
 
     UIView.animateWithDuration(AnimationTiming.movement, animations: {
       self.whisperView.frame.size.height = WhisperView.Dimensions.height
+    
       for subview in self.whisperView.transformViews {
         subview.frame.origin.y = 0
-
         if subview == self.whisperView.complementImageView {
           subview.frame.origin.y = (WhisperView.Dimensions.height - WhisperView.Dimensions.imageSize) / 2
         }
-
         subview.alpha = 1
       }
     })
@@ -239,20 +238,16 @@ class WhisperFactory: NSObject {
 
   func performControllerMove(viewController: UIViewController) {
     guard Config.modifyInset else { return }
-
-    if let tableView = viewController.view as? UITableView
-      where viewController is UITableViewController {
-        tableView.contentInset = UIEdgeInsetsMake(tableView.contentInset.top + edgeInsetHeight, 0, 0, 0)
-    } else if let collectionView = viewController.view as? UICollectionView
-      where viewController is UICollectionViewController {
-        collectionView.contentInset = UIEdgeInsetsMake(collectionView.contentInset.top + edgeInsetHeight, 0, 0, 0)
-    } else {
-      for view in viewController.view.subviews {
-        if let scrollView = view as? UIScrollView {
-          scrollView.contentInset = UIEdgeInsetsMake(scrollView.contentInset.top + edgeInsetHeight, 0, 0, 0)
-        }
-      }
+    
+    if let scrollView = viewController.view as? UIScrollView {
+        scrollView.contentInset = UIEdgeInsetsMake(scrollView.contentInset.top + edgeInsetHeight, 0, 0, 0)
+        let point =  CGPointMake(0, edgeInsetHeight == WhisperView.Dimensions.height  ? -edgeInsetHeight : 0 )
+        scrollView.contentOffset = point;
+    }else{
+         //let point =  CGPointMake(0,  navigationController.navigationBar.frame.height + edgeInsetHeight  )
+         //viewController.view.frame.origin = point
     }
+    
   }
 
   // MARK: - Handling screen orientation
