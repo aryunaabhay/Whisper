@@ -14,7 +14,7 @@ public class ShoutView: UIView {
     public static let imageSize: CGFloat = 40
     public static let imageOffset: CGFloat = 12
     public static var height: CGFloat = UIApplication.sharedApplication().statusBarHidden ? 75 : 85
-    public static var textOffset: CGFloat = 67
+    public static var textOffset: CGFloat = 60
   }
 
   public private(set) lazy var backgroundView: UIView = {
@@ -172,7 +172,7 @@ public class ShoutView: UIView {
 
   public func setupFrames() {
     let totalWidth = UIScreen.mainScreen().bounds.width
-    let offset: CGFloat = UIApplication.sharedApplication().statusBarHidden ? 4.5 : 7
+    let offset: CGFloat = UIApplication.sharedApplication().statusBarHidden ? 1.5 : 4
 
     backgroundView.frame.size = CGSize(width: totalWidth, height: Dimensions.height)
     gestureContainer.frame = CGRect(x: 0, y: Dimensions.height - 20, width: totalWidth, height: 20)
