@@ -157,8 +157,8 @@ public class ShoutView: UIView {
     }
 
     let width = UIScreen.mainScreen().bounds.width
-    controller.view.addSubview(self)
-
+    controller.view.window?.addSubview(self)
+    
     frame = CGRect(x: 0, y: 0, width: width, height: 0)
     backgroundView.frame = CGRect(x: 0, y: 0, width: width, height: 0)
 
