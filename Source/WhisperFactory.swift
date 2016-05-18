@@ -7,8 +7,8 @@ public enum WhisperAction: String {
 
 let whisperFactory: WhisperFactory = WhisperFactory()
 
-public func Whisper(message: Message, to: UINavigationController, action: WhisperAction = .Show) {
-  whisperFactory.craft(message, navigationController: to, action: action)
+public func Whisper(message: Message, to: UINavigationController, action: WhisperAction = .Show, completion: (() -> Void)? ) {
+  whisperFactory.craft(message, navigationController: to, action: action, completion: completion)
 }
 
 public func Silent(controller: UINavigationController, after: NSTimeInterval = 0) {
@@ -31,6 +31,8 @@ class WhisperFactory: NSObject {
   var delayTimer = NSTimer()
   var presentTimer = NSTimer()
   var navigationStackCount = 0
+  var completion: (() -> Void)?
+    
     var navbarHeight : CGFloat {
         get {
             let statubarHidden = UIApplication.sharedApplication().statusBarHidden
@@ -48,11 +50,11 @@ class WhisperFactory: NSObject {
     NSNotificationCenter.defaultCenter().removeObserver(self, name: UIDeviceOrientationDidChangeNotification, object: nil)
   }
 
-  func craft(message: Message, navigationController: UINavigationController, action: WhisperAction) {
+  func craft(message: Message, navigationController: UINavigationController, action: WhisperAction, completion: (() -> Void)?) {
     self.navigationController = navigationController
     self.navigationController.delegate = self
     presentTimer.invalidate()
-
+    self.completion = completion
     var containsWhisper = false
     for subview in navigationController.navigationBar.subviews {
       if let whisper = subview as? WhisperView {
@@ -174,6 +176,7 @@ class WhisperFactory: NSObject {
         subview.alpha = 0
       }
       }, completion: { _ in
+        self.completion?()
         self.whisperView.removeFromSuperview()
     })
   }
