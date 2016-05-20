@@ -56,7 +56,7 @@ class WhisperFactory: NSObject {
     presentTimer.invalidate()
     self.completion = completion
     var containsWhisper = false
-    for subview in navigationController.navigationBar.subviews {
+    for subview in navigationController.view.window!.subviews {
       if let whisper = subview as? WhisperView {
         whisperView = whisper
         containsWhisper = true
@@ -94,7 +94,7 @@ class WhisperFactory: NSObject {
     navigationController = controller
 
     var whisperSubview: WhisperView? = nil
-    for subview in navigationController.navigationBar.subviews {
+    for subview in navigationController.view.window!.subviews {
       if let whisper = subview as? WhisperView {
         whisperSubview = whisper
         break
@@ -269,12 +269,12 @@ class WhisperFactory: NSObject {
 extension WhisperFactory: UINavigationControllerDelegate {
 
   func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
-    whisperView.frame.origin.y = self.navbarHeight
+    //whisperView.frame.origin.y = self.navbarHeight
   }
 
   func navigationController(navigationController: UINavigationController, didShowViewController viewController: UIViewController, animated: Bool) {
 
-    for subview in navigationController.navigationBar.subviews where subview is WhisperView {
+    /*for subview in navigationController.navigationBar.subviews where subview is WhisperView {
       moveControllerViews(true)
 
       if let index = navigationController.viewControllers.indexOf(viewController) where index > 0 {
@@ -282,6 +282,8 @@ extension WhisperFactory: UINavigationControllerDelegate {
         performControllerMove(navigationController.viewControllers[Int(index) - 1])
         break
       }
-    }
+    }*/
   }
+    
+
 }
